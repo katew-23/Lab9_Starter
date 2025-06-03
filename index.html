@@ -102,6 +102,104 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+    const [
+      logBtn,
+      errorBtn,
+      countBtn,
+      warnBtn,
+      assertBtn,
+      clearBtn,
+      dirBtn,
+      dirxmlBtn,
+      groupStartBtn,
+      groupEndBtn,
+      tableBtn,
+      startTimerBtn,
+      endTimerBtn,
+      traceBtn,
+      globalErrorBtn
+    ] = errorBtns;
+
+    logBtn.addEventListener('click', () => {
+      console.log('Console Log Demo');
+    });
+
+    errorBtn.addEventListener('click', () => {
+      console.error('Console Error Demo');
+    });
+
+    countBtn.addEventListener('click', () => {
+      console.count('Count Button');
+    });
+
+    warnBtn.addEventListener('click', () => {
+      console.warn('Console Warn Button');
+    });
+
+    assertBtn.addEventListener('click', () => {
+      let first = document.querySelector('#first-num').value;
+      let num = parseInt(first, 10);
+
+      console.assert(
+        num == 3,
+        {number: num, errorMsg: 'The number does not equal 3'}
+      );
+    });
+
+    clearBtn.addEventListener('click', () => {
+      console.clear();
+    });
+
+    dirBtn.addEventListener('click', () => {
+      console.dir(document.querySelector('button'));
+    });
+
+    dirxmlBtn.addEventListener('click', () => {
+      console.dirxml(dirxmlBtn);
+    });
+    
+    groupStartBtn.addEventListener('click', () => {
+      console.group('console.group');
+    });
+
+    groupEndBtn.addEventListener('click', () => {
+      console.groupEnd();
+    });
+
+    tableBtn.addEventListener('click', () => {
+      const courses = [
+        {name: 'Software Engineering', num: 110},
+        {name: 'Programming Languages', num: 130},
+        {name: 'Advanced Software', num: 112}
+      ];
+      console.table(courses);
+    });
+
+    startTimerBtn.addEventListener('click', () => {
+      console.time('Timer Button');
+    });
+
+    endTimerBtn.addEventListener('click', () => {
+      console.timeEnd('Timer Button');
+    });
+
+    traceBtn.addEventListener('click', function handleBtnClick() {
+      function deepest(){
+        console.trace('console.trace');
+      }
+
+      function deeper(){
+        deepest();
+      }
+
+      function deep(){
+        deeper();
+      }
+
+      deep();
+    });
+
+
   </script>
 </body>
 
