@@ -251,11 +251,10 @@
       deep();
     });
 
-    window.addEventListener('error', (event) => {
-      console.log('Sadly an error happened my friend');
-      console.error(event.error);
-      event.preventDefault();
-    });
+    window.onerror = function(errorMessage, url, lineNumber) {
+      console.log(`Global error caught: "${errorMessage}" at ${url}: ${lineNumber}`);
+      return true;
+    };
 
     globalErrorBtn.addEventListener('click', function handleBtnClick() {
       boom();
