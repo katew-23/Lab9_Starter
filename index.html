@@ -7,6 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lab 9</title>
 
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+  <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "4ff9405a32b849a3910c062d624ca813",
+      application: "lab-9"
+    });
+  </script>
+
   <style>
     button {
       margin: 3px;
@@ -241,6 +249,16 @@
       }
 
       deep();
+    });
+
+    window.addEventListener('error', (event) => {
+      console.log('Sadly an error happened my friend');
+      console.error(event.error);
+      event.preventDefault();
+    });
+
+    globalErrorBtn.addEventListener('click', function handleBtnClick() {
+      boom();
     });
 
 
