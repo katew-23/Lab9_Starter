@@ -88,6 +88,13 @@
   </main>
 
   <script>
+    class CalculationError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = 'CalculationError';
+      }
+    }
+
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
       e.preventDefault();
@@ -97,16 +104,39 @@
       let operator = document.querySelector('#operator').value;
 
       try{
-        let result = eval(`${firstNum} ${operator} ${secondNum}`);
-
-        if (typeof result != 'number' || isNaN(result) || !isFinite(result)){
-          throw new Error('Computation resulted in an invalid number');
+        if (firstNum === ''){
+          throw new CalculationError('First input is required');
         }
 
+        if (secondNum === ''){
+          throw new CalculationError('Second input is required');
+        }
+
+        let a = Number(firstNum);
+        let b = Number(secondNum);
+
+        if (isNaN(a)){
+          throw new CalculationError(`"${firstNum}" is not a valid number`);
+        }
+
+        if (isNaN(b)){
+          throw new CalculationError(`"${secondNum}" is not a valid number`);
+        }
+
+        if (operator === '/' && b === 0) {
+          throw new CalculationError('Division by zero is not allowed');
+        }
+        
+        let result = eval(`${firstNum} ${operator} ${secondNum}`);
         output.innerHTML = result;
       }
       catch (err){
-        console.error('Error during calculation: ', err);
+        if (err instanceof CalculationError){
+          console.error(`CalculationError: ${err.message}`);
+        }
+        else{
+          console.error('Error during calculation:', err);
+        }
         output.innerHTML = 'Invalid Expression';
       }
       
