@@ -95,7 +95,21 @@
       let firstNum = document.querySelector('#first-num').value;
       let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
-      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+
+      try{
+        let result = eval(`${firstNum} ${operator} ${secondNum}`);
+
+        if (typeof result != 'number' || isNaN(result) || !isFinite(result)){
+          throw new Error('Computation resulted in an invalid number');
+        }
+
+        output.innerHTML = result;
+      }
+      catch (err){
+        console.error('Error during calculation: ', err);
+        output.innerHTML = 'Invalid Expression';
+      }
+      
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
